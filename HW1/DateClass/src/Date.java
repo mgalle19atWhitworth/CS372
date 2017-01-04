@@ -29,10 +29,4 @@ public class Date {
 	public int getYear(){
 		return year;
 	}
-	public static void main(String[] args) {
-		Date date=new Date(1,3,17);
-		System.out.printf("%d/%d/%d",date.getMonth(),date.getDay(),date.getYear());
-
-	}
-
 }
