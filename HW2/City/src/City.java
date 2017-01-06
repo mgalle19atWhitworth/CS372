@@ -1,10 +1,14 @@
-
+/**
+ * Creates and out puts all the people and buildings. Also pays the employees. 
+ * @author mgalle19
+ *
+ */
 public class City {
 
 	public static void main(String[] args) {
 
 		Person[] people={new Teacher("Tom",30,5556897,6,"Teaching"),new Teacher("Bob",40,5557894,12,"Teaching"),
-						 new Police("Mike",35,5551234), new Police("Aubree",28,1478978),
+						 new Police("Mike",35,5551234,Police.Type.Cheif), new Police("Aubree",28,1478978,Police.Type.Patrol),
 						 new Kid("Aaron",6,7894561,"Suckers"), new Kid("Brian",10,3216549,"Starburst")};
 		Building[] building={new CityHall("City Hall","1234 main"), new School("School","456 Main")};
 		
