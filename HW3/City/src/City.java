@@ -31,10 +31,12 @@ import java.awt.Insets;
  */
 public class City extends JComponent implements MouseMotionListener, MouseListener {
 	int imageX, imageY;
-	int imageZ=100;
-	int imageI=0;
-	int x = 150;
-	int y =  0;
+	int imageZ=1100;
+	int imageI=700;
+	int x = 50;
+	int y = 450;
+	int d = 0;
+	int z = 0;
 	Image image, imageField, school, cityHall,police,teachers;
 	
 	Person[] people={new Teacher("Tom",30,5556897,6,"Teaching"),new Teacher("Bob",40,5557894,12,"Teaching"),
@@ -43,6 +45,9 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 	Building[] building={new CityHall("City Hall","1234 main"), new School("School","456 Main")};
 	School s = (School) building[1];
 	CityHall C=(CityHall) building[0];
+	String PoliceOfficer1 = people[2].getName();
+	String Teacher1=people[0].getName();
+	String Kid1=people[4].getName();
 	
 	public City(Image i,Image schools,Image cityhall,Image p,Image t ,Image ifield ){
 		image = i;
@@ -59,50 +64,81 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 	
 	public void mouseClicked(MouseEvent e){
 		
-		if(e.getY() > 250 && e.getY() < 450){
+		if(e.getY() > 400 && e.getY() < 600 && e.getX() >700 && e.getX()<900){
 			System.out.printf("%s,%s\n",building[1].name,building[1].address);
 			s.showOccupants();
 		}
-		else if (e.getY() > 0 && e.getY() < 200 && e.getX() > 600 && e.getX() < 800)
+		else if (e.getY() > 0 && e.getY() < 150 && e.getX() > 350 && e.getX() < 500)
 		{
 			System.out.printf("%s,%s\n",building[0].name,building[0].address);
 			C.showOccupants();
 		}
-				}
+		else if (e.getX() > imageX && e.getX()< imageX +60){
+			System.out.printf("%s,%d,%d\n",people[4].getName(),people[4].getAge(),people[4].getNumber());
+		}
+		else if (e.getX()> imageZ && e.getX() < imageZ +60){
+			Police p1=(Police) people[2];
+			System.out.printf("%s,%d,%d,%s\n",people[2].getName(),people[2].getAge(),people[2].getNumber(),p1.getRole());
+		}
+		else if (e.getX()>x && e.getX() < x +60){
+			System.out.printf("%s,%d,%d\n",people[0].getName(),people[0].getAge(),people[0].getNumber());
+		}
+	}
 	public void mouseEntered(MouseEvent e){}
 	public void mouseExited(MouseEvent e){}
 	public void mousePressed(MouseEvent e){
-		
+		if (e.getX() >= imageX && e.getX() <= imageX + 100 && e.getY()>= imageY && e.getY() <= imageY +100)
+			d = 1;
+		else if (e.getX() >= imageZ && e.getX() <= imageZ + 100 && e.getY()>= imageI && e.getY() <= imageI +100)
+			d = 2;
+		else if (e.getX() >= x && e.getX() <= x + 100 && e.getY()>= y && e.getY() <= y +100)
+			d = 3;
 	}
-	public void mouseReleased(MouseEvent e){}
+	public void mouseReleased(MouseEvent e){
+		d = 0;
+	}
 	
 	public void mouseDragged(MouseEvent e){	
-		
-		if(e.getX()> imageX && e.getX()< imageX +60 && e.getY() > imageY && e.getY() < imageY+60){
-		imageX=e.getX();
-		imageY=e.getY();
-		repaint();
+		if(d == 0){
+			if (e.getX() >= imageX && e.getX() <= imageX + 100 && e.getY()>= imageY && e.getY() <= imageY +100)
+				d = 1;
+			else if (e.getX() >= imageZ && e.getX() <= imageZ + 100 && e.getY()>= imageI && e.getY() <= imageI +100)
+				d = 2;
+			else if (e.getX() >= x && e.getX() <= x + 100 && e.getY()>= y && e.getY() <= y +100)
+				d = 3;
 		}
-		else if(imageX >325 && imageX< 375){
-				String Kid1=people[4].getName();
-				s.addEmployee(Kid1);
+		else if (d == 1){
+			imageX = e.getX();
+			imageY= e.getY();
+				if(imageX > 700 && imageX < 900 && imageY > 400 && imageY <600){
+						s.addEmployee(Kid1);
+					
 			}
-			
-
-	else if(e.getX()>imageZ && e.getX() < imageZ+60 && e.getY() > imageI && e.getY() < imageI +60){
-		imageZ = e.getX();
-		imageI = e.getY();
+			else if (imageX > 700 || imageX < 900 || imageY >400 || imageY <600){
+				s.removePerson(Kid1);
+			}
+		}
+		else if (d == 2){
+			imageZ = e.getX();
+			imageI= e.getY();
+			if (imageZ >350 && imageZ <500 && imageI > 0 && imageI < 150 ){
+				C.addEmployee(PoliceOfficer1);
+			}
+			else if (imageZ >350 || imageZ <500 || imageI > 0 || imageI < 150 ){
+				C.removeEmployee(PoliceOfficer1);
+			}
+		}
+		else if (d ==3){
+			x =e.getX();
+			y = e.getY();
+			if(x > 700 && x <900 && y > 400 && y <600){
+				s.addEmployee(Teacher1);
+			}
+			else if (x > 700 || x < 900 || y >400 || y <600){
+				s.removePerson(Teacher1);
+			}
+		}
 		repaint();
-	}
-		else if (imageZ>600 &&imageZ < 700){
-		String PoliceOfficer1 = people[2].getName();
-		C.addEmployee(PoliceOfficer1);
-		}
-		else if (e.getX() > x && e.getX() < x+60 && e.getY() > y && e.getY()<y + 60){
-			x = e.getX();
-			y=e.getY();
-			repaint();
-		}
 	}
 	
 	public void mouseMoved(MouseEvent e){}
@@ -113,12 +149,12 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 		g2.drawImage(image, imageX, imageY, this);
 		g2.drawImage(police, imageZ,imageI, this);
 		g2.drawImage(teachers, x, y, this);
-		g2.drawImage(school,325,250,this);
-		g2.drawImage(cityHall, 600, 0, this);
+		g2.drawImage(school,700,400,this);
+		g2.drawImage(cityHall, 350, 0, this);
 		
 	}
 	
-	static int imageWidth=60, imageHeight=60;
+	static int imageWidth=100, imageHeight=100;
 
 	public static void main(String[] args) {
 
@@ -141,13 +177,13 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 	    Image image2 = Toolkit.getDefaultToolkit().getImage(City.class.getResource(school));
 	    Image cityhall = Toolkit.getDefaultToolkit().getImage(City.class.getResource(cityHall));
 	    image2 = image2.getScaledInstance(200,200,Image.SCALE_DEFAULT);
-	    cityhall = cityhall.getScaledInstance(200,200,Image.SCALE_DEFAULT);
+	    cityhall = cityhall.getScaledInstance(150,160,Image.SCALE_DEFAULT);
 	    
 	    JFrame frame = new JFrame("DragImage");  
 	   
 	    
 	      frame.add(new City(image,image2,cityhall,police,teachers,imageField));
-	      frame.setSize(800, 500);
+	      frame.setSize(1300,1000);
 	      frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	      frame.setVisible(true);
 	
