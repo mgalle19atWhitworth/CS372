@@ -21,11 +21,10 @@ private ArrayList<String> occupants = new ArrayList<String>();
  * @param name inputs the employee name into the building array
  */
 	public void addEmployee(String name){
-	if (occupants.contains(name)){
+		if (occupants.contains(name)){}
 		
-	}
-	else 
-		occupants.add(name);
+		else 
+			occupants.add(name);
 	}
 	public void removePerson(String name){
 		occupants.remove(name);

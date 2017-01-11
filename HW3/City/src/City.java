@@ -27,7 +27,6 @@ import java.awt.Insets;
 /**
  * Creates and out puts all the people and buildings. Also pays the employees. 
  * @author mgalle19
- *
  */
 public class City extends JComponent implements MouseMotionListener, MouseListener {
 	// the starting position for the pictures
@@ -43,7 +42,9 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 	int teacher1Y = 680;
 	int teacher2X = 80;
 	int teacher2Y=400;
+	
 	int d = 0;
+	static int imageWidth=100, imageHeight=100;
 	Image kid,kid2, cityI, school, cityHall,police,police2,teachers,teachers2;
 	
 	// initializes people for the city
@@ -88,10 +89,8 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 		teachers = t;
 		teachers2=t2;
 		
-		
 		addMouseMotionListener(this);
 		addMouseListener(this);
-		
 	}
 	
 	public void mouseClicked(MouseEvent e){
@@ -100,29 +99,36 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 			System.out.printf("%s,%s\n",building[1].name,building[1].address);
 			s.showOccupants();
 		}
+		
 		else if (e.getY() > 0 && e.getY() < 150 && e.getX() > 350 && e.getX() < 500)
 		{
 			System.out.printf("%s,%s\n",building[0].name,building[0].address);
 			C.showOccupants();
 		}
-		else if (e.getX() > kid1X && e.getX()< kid1X +100){
+		
+		else if (e.getX() > kid1X && e.getX()< kid1X +100 && e.getY() > kid1Y && e.getY() < kid1Y +100){
 			System.out.printf("%s,%d,%d\n",people[4].getName(),people[4].getAge(),people[4].getNumber());
 		}
-		else if (e.getX() > kid2X && e.getX()< kid2X +100){
+		
+		else if (e.getX() > kid2X && e.getX()< kid2X +100 &&  e.getY() > kid2Y && e.getY() < kid2Y +100){
 			System.out.printf("%s,%d,%d\n",people[5].getName(),people[5].getAge(),people[5].getNumber());
 		}
-		else if (e.getX()> police1X && e.getX() < police1X +100){
+		
+		else if (e.getX()> police1X && e.getX() < police1X +100 && e.getY() > police1Y && e.getY() < police1Y+100){
 			Police p1=(Police) people[2];
 			System.out.printf("%s,%d,%d,%s\n",people[2].getName(),people[2].getAge(),people[2].getNumber(),p1.getRole());
 		}
-		else if (e.getX()> police2X && e.getX() < police2X +100){
+		
+		else if (e.getX()> police2X && e.getX() < police2X +100 && e.getY() > police2Y && e.getY() < police2Y+100){
 			Police p2=(Police) people[3];
 			System.out.printf("%s,%d,%d,%s\n",people[3].getName(),people[3].getAge(),people[3].getNumber(),p2.getRole());
 		}
-		else if (e.getX()>teacher1X && e.getX() < teacher1X +100){
+		
+		else if (e.getX()>teacher1X && e.getX() < teacher1X +100 && e.getY() > teacher1Y && e.getY() < teacher1Y +100){
 			System.out.printf("%s,%d,%d\n",people[0].getName(),people[0].getAge(),people[0].getNumber());
 		}
-		else if (e.getX()>teacher2X && e.getX() < teacher2X +100){
+		
+		else if (e.getX()>teacher2X && e.getX() < teacher2X +100 && e.getY() > teacher2Y && e.getY() < teacher2Y+100){
 			System.out.printf("%s,%d,%d\n",people[1].getName(),people[1].getAge(),people[1].getNumber());
 		}
 	}
@@ -239,11 +245,8 @@ public class City extends JComponent implements MouseMotionListener, MouseListen
 		g2.drawImage(teachers2, teacher2X, teacher2Y, this);
 		g2.drawImage(school,700,400,this);
 		g2.drawImage(cityHall, 350, 0, this);
-		
 	}
 	
-	static int imageWidth=100, imageHeight=100;
-
 	public static void main(String[] args) {
 
 		String kid1="/resources/kids.png"; // kid image

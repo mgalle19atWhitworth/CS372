@@ -20,10 +20,10 @@ public class CityHall extends Building {
 	 * @param name inputs the employee name into the building array
 	 */
 	public void addEmployee(String name){
-		if (occupants.contains(name)){
-		}
+		if (occupants.contains(name)){}
+		
 		else 	
-		occupants.add(name);
+			occupants.add(name);
 	}
 	
 	public void removeEmployee(String name){
