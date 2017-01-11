@@ -18,6 +18,7 @@ public class Police extends Person implements Employee{
 	 * @param newName initializes name 
 	 * @param newAge initializes age
 	 * @param newNumber initializes phoneNumber
+	 * @param r the role of the police officer
 	 */
 	public Police(String newName,int newAge, int newNumber,Type r)
 	{
