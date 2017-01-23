@@ -5,6 +5,12 @@ import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
+
+/** 
+ * This class creates threads, a button and creates the layout and extends JFrame
+ * @author mgalle19
+ *@version 1.0 23 January 2017
+ */
 public class ThreadTest extends JFrame {
 	public ThreadTest(){
 	setSize(500,500);
@@ -41,7 +47,11 @@ public class ThreadTest extends JFrame {
 	    }
 	
 }
-
+/**
+ * This class creates five dice and randomly rolls them
+ * @author mgalle19
+ * @version 100 23 January 2017
+ */
 class Roll implements Runnable{
 	
 	private JLabel _label;
@@ -49,6 +59,9 @@ class Roll implements Runnable{
 		_label = label;
 		
 	}
+	/**
+	 * Randomly chooses the dice face
+	 */
 	public void run(){
 		Random rand = new Random();
 		Random r = new Random();

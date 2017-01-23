@@ -5,7 +5,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * This class creates a web spider and visits 100 different websites
+ * @author mgalle19
+ * @version 1.0, 23 January 2017
+ */
 public class InetDisplay {
 	 static Map<String,Boolean> y= new HashMap<String,Boolean>();
     public static void main(String[] args) {
@@ -34,6 +38,10 @@ public class InetDisplay {
             System.out.printf("Oops: %s", ex.getMessage());
         }
     }
+    /**
+     * Returns the web site in the HashMap
+     * @return the next web site
+     */
     private static String next(){
     	for(Map.Entry<String, Boolean> e: y.entrySet()){
     		if(e.getValue()==false){
